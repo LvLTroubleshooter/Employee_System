@@ -1,4 +1,5 @@
-
+{% extends "base.html" %}
+{% block content %}
 
 <!DOCTYPE html>
 <html>
@@ -7,5 +8,18 @@
 </head>
 <body>
     <h1>Employees List</h1>
+    <a href="{% url 'employee_create' %}">Add New Employee</a>
+    <ul>
+        {% for employee in employees %}
+        <li>
+            {{ employee.name }} - {{ employee.position }}
+            <a href="{% url 'employee_update' employee.pk %}">Edit</a> |
+            <a href="{% url 'employee_delete' employee.pk %}">Delete</a>
+        </li>
+        {% empty %}
+        <li>No Employees available.</li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
+{% endblock %}
